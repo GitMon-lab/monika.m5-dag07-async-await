@@ -1,10 +1,10 @@
 # Dag 7 · async och await
 
-*Modul 5, UI/UX & Frontendutveckling (TypeScript), Lexicon IT-Proffs*
+_Modul 5, UI/UX & Frontendutveckling (TypeScript), Lexicon IT-Proffs_
 
 ## Vad du ska göra idag
 
-Du skriver **asynkron kod** som ser ut som vanlig kod med `async` och `await`. Du hanterar fel med `try/catch`, kör anrop parallellt med `Promise.all`, provar igen när något misslyckas och bygger funktionen `laddaMeny` som ger tillstånden *laddar*, *klar*, *tomt* och *fel*.
+Du skriver **asynkron kod** som ser ut som vanlig kod med `async` och `await`. Du hanterar fel med `try/catch`, kör anrop parallellt med `Promise.all`, provar igen när något misslyckas och bygger funktionen `laddaMeny` som ger tillstånden _laddar_, _klar_, _tomt_ och _fel_.
 
 ## Bakgrund
 
@@ -19,26 +19,27 @@ Igår läste du asynkron kod. Idag skriver du den. `async` och `await` är bara 
 
 ```ts
 type Tillstand =
-  | { typ: "laddar" }
-  | { typ: "tomt" }
-  | { typ: "klar"; ratter: Ratt[] }
-  | { typ: "fel"; meddelande: string };
+    | { typ: 'laddar' }
+    | { typ: 'tomt' }
+    | { typ: 'klar'; ratter: Ratt[] }
+    | { typ: 'fel'; meddelande: string }
 ```
 
 När du har kollat `if (t.typ === "klar")` vet TypeScript att `t.ratter` finns. I `"laddar"` finns inte `ratter`, och försöker du läsa den får du ett fel direkt. I JavaScript får du `undefined` först när sidan körs.
 
 ## Så arbetar du (samma som alltid)
 
-1. **Forka** dagens repo på GitHub (*Fork → Create fork*).
-2. **Klona din fork:** *Code → HTTPS → kopiera adressen*. I terminalen (Ctrl+ö i VS Code): `git clone <adressen>`. Öppna den nya mappen i VS Code.
+1. **Forka** dagens repo på GitHub (_Fork → Create fork_).
+2. **Klona din fork:** _Code → HTTPS → kopiera adressen_. I terminalen (Ctrl+ö i VS Code): `git clone <adressen>`. Öppna den nya mappen i VS Code.
 3. **Installera verktygen, en gång per repo:** `npm install` i terminalen.
-4. **Starta servern:** `npm run dev`. Öppna adressen den skriver ut (oftast `http://localhost:5173/`). Tryck F12 och välj fliken *Console*. Stoppa med Ctrl+C. Testsidan öppnar du på samma server: `http://localhost:5173/tests.html` (lägg till `/tests.html` efter adressen).
+4. **Starta servern:** `npm run dev`. Öppna adressen den skriver ut (oftast `http://localhost:5173/`). Tryck F12 och välj fliken _Console_. Stoppa med Ctrl+C. Testsidan öppnar du på samma server: `http://localhost:5173/tests.html` (lägg till `/tests.html` efter adressen).
 5. **Gör uppgiften.** Spara och kontrollera i webbläsaren och Console efter varje steg. Gör en commit efter varje avslutat steg: `git add .` och `git commit -m "Beskriv vad du gjorde"`.
+
 6. **Kontrollera typerna:** `npm run typecheck`. Tyst betyder att alla typer stämmer. Röda understrykningar i VS Code är TypeScript som varnar.
 7. **Skicka upp** när du är klar: `git push`.
 8. **Lämna in i Microsoft Forms.**
 
-Fastnar du: skriv ner exakt var och vad du försökt (och vilket felmeddelande du fick), och ta det först i nästa handledda pass. Problem med `npm` eller Node? Läs *Elevguide: Node, Vite och TypeScript*.
+Fastnar du: skriv ner exakt var och vad du försökt (och vilket felmeddelande du fick), och ta det först i nästa handledda pass. Problem med `npm` eller Node? Läs _Elevguide: Node, Vite och TypeScript_.
 
 > Vite tar bara bort typerna och kör koden. Den kontrollerar dem inte. Sidan kan alltså köras trots röda understrykningar.
 
@@ -70,7 +71,7 @@ Skriv `laddaMeny(hamtaFn, vidTillstand)`. Först `laddar`, sedan antingen `klar`
 
 ### Steg 7. Se det på sidan
 
-Öppna `index.html` med Vite-servern. Tryck på *Ladda menyn*. Prova rutorna *Simulera fel* och *Simulera tom lista*. Öppna Console och DevTools. Ser du de fyra tillstånden? Du behöver inte ändra `src/demo.ts`.
+Öppna `index.html` med Vite-servern. Tryck på _Ladda menyn_. Prova rutorna _Simulera fel_ och _Simulera tom lista_. Öppna Console och DevTools. Ser du de fyra tillstånden? Du behöver inte ändra `src/demo.ts`.
 
 ### Steg 8. Fördjupning (frivillig): allSettled
 
@@ -87,7 +88,7 @@ Skriv `hamtaAllaForsiktigt(idLista)` som hämtar många rätter parallellt med `
 
 ## Tips om du fastnar
 
-- Glömmer du `await` får du en *promise* istället för värdet. Det syns som `Promise { <pending> }` i Console.
+- Glömmer du `await` får du en _promise_ istället för värdet. Det syns som `Promise { <pending> }` i Console.
 - `await` fungerar bara inuti en `async function` (och i moduler på toppnivå). Får du ett syntaxfel, titta på funktionens första rad.
 - Vill du köra två anrop samtidigt: starta båda först, vänta sedan. `await Promise.all([a(), b()])`.
 - `return await` inuti `try` behövs om du vill att `catch` ska fånga felet. Utan `await` slipper felet förbi.
@@ -106,5 +107,5 @@ I formuläret fyller du i:
 ## Vill du mer? (frivilligt)
 
 - Skriv `medTimeoutOchForsok` som kombinerar `hamtaMedForsok` och `medTimeout`.
-- Lägg till en fördröjning mellan försöken i `hamtaMedForsok` (vänta 200 ms, sedan 400 ms: *exponentiell backoff*).
+- Lägg till en fördröjning mellan försöken i `hamtaMedForsok` (vänta 200 ms, sedan 400 ms: _exponentiell backoff_).
 - Skriv en `AbortController`-version av `medTimeout` som faktiskt avbryter anropet (vi ser det på dag 10).
