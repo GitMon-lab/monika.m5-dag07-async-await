@@ -1,44 +1,78 @@
 // Dag 7, del 2: Skriv egna async-funktioner. Gör testerna gröna på tests.html.
 // Alla funktioner ska vara async och använda await. Använd INTE .then().
-import { hamtaMenyFranServer, hamtaRattFranServer } from "./fordrojning";
-import type { Ratt, Tillstand } from "./typer";
+import { hamtaMenyFranServer, hamtaRattFranServer } from './fordrojning'
+import type { Ratt, Tillstand } from './typer'
+
+//  Ratt objectet från typer
+//  export interface Ratt {
+//  id: number;
+//  namn: string;
+//  pris: number;
+//  kategori: Kategori;
+//  vegetarisk: boolean;
+//  bild?: string;          // frågetecknet betyder att egenskapen är valfri
+//  beskrivning?: string;
+//}
 
 // 1. Hämta hela menyn (använd hamtaMenyFranServer med 10 ms). Returnerar menyn.
 export async function hamtaMeny(): Promise<Ratt[]> {
-  // TODO
+    // TODO
+    return await hamtaMenyFranServer(10)
 }
 
 // 2. Hämta namnet på en rätt (hamtaRattFranServer(id, 10)). Okänt id: låt felet följa med (fånga det inte).
 export async function hamtaRattNamn(id: number): Promise<string> {
-  // TODO
+    //   export async function hamtaRattNamn(id: number): Promise<Ratt[]> {
+    // TODO
+    const ratt = await hamtaRattFranServer(id, 10)
+    // Väntar 10 sekunder innan hämtning
+    //Hämtar bara rätten med id som skickats med och returnerar namnet
+    return ratt.namn
 }
 
 // 3. Som 2, men om något går fel returnerar funktionen null istället för att kasta fel (try/catch).
 export async function hamtaRattEllerNull(id: number): Promise<Ratt | null> {
-  // TODO
+    // TODO
+
+    try {
+        return await hamtaRattFranServer(id, 10)
+    } catch {
+        return null
+    }
 }
 
 // 4. Hämta två rätter EFTER varandra (await, sedan await). Returnerar [ratt1, ratt2]. ms är väntetiden per anrop.
-export async function hamtaTvaRatterEfterVarandra(id1: number, id2: number, ms: number = 100): Promise<Ratt[]> {
-  // TODO
+export async function hamtaTvaRatterEfterVarandra(
+    id1: number,
+    id2: number,
+    ms: number = 100
+): Promise<Ratt[]> {
+    // TODO
 }
 
 // 5. Samma sak, men båda ANROPEN startas samtidigt (Promise.all). Ska gå dubbelt så snabbt.
-export async function hamtaTvaRatterParallellt(id1: number, id2: number, ms: number = 100): Promise<Ratt[]> {
-  // TODO
+export async function hamtaTvaRatterParallellt(
+    id1: number,
+    id2: number,
+    ms: number = 100
+): Promise<Ratt[]> {
+    // TODO
 }
 
 // 6. Försök upp till maxForsok gånger. anropFn är en funktion som returnerar en promise.
 //    Lyckas något försök: returnera resultatet. Misslyckas alla: kasta det SISTA felet.
 //    Tips: en for-loop med try/catch inuti, och spara det senaste felet i en variabel.
-export async function hamtaMedForsok<T>(anropFn: () => Promise<T>, maxForsok: number): Promise<T> {
-  // TODO
+export async function hamtaMedForsok<T>(
+    anropFn: () => Promise<T>,
+    maxForsok: number
+): Promise<T> {
+    // TODO
 }
 
 // 7. Ge en promise en tidsgräns. Är den inte klar inom ms millisekunder: avvisa med
 //    new Error("Tidsgränsen överskreds"). Tips: Promise.race med en promise som avvisas efter ms.
 export function medTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
-  // TODO
+    // TODO
 }
 
 // 8. Tillståndsmaskinen för att ladda något: laddar -> klar / tomt / fel.
@@ -47,6 +81,9 @@ export function medTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
 //      { typ: "klar", ratter: [...] }          om listan har innehåll
 //      { typ: "tomt" }                         om listan är tom
 //      { typ: "fel", meddelande: "..." }       om hamtaFn misslyckas (felets message)
-export async function laddaMeny(hamtaFn: () => Promise<Ratt[]>, vidTillstand: (tillstand: Tillstand) => void): Promise<void> {
-  // TODO
+export async function laddaMeny(
+    hamtaFn: () => Promise<Ratt[]>,
+    vidTillstand: (tillstand: Tillstand) => void
+): Promise<void> {
+    // TODO
 }
