@@ -96,6 +96,7 @@ export async function hamtaMedForsok<T>(
 
 // 7. Ge en promise en tidsgräns. Är den inte klar inom ms millisekunder: avvisa med
 //    new Error("Tidsgränsen överskreds"). Tips: Promise.race med en promise som avvisas efter ms.
+//ingen async därför inte await
 export function medTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
     // TODO
     const timeoutPromise = new Promise<T>((_, reject) => {
@@ -118,4 +119,18 @@ export async function laddaMeny(
     vidTillstand: (tillstand: Tillstand) => void
 ): Promise<void> {
     // TODO
+    vidTillstand({ typ: 'laddar' })
+
+    try {
+        const ratter = await hamtaFn()
+
+        if (ratter.length > 0) {
+            vidTillstand({ typ: 'klar', ratter })
+        } else {
+            vidTillstand({ typ: 'tomt' })
+        }
+    } catch (fel) {
+        const meddelande = fel instanceof Error ? fel.message : String(fel)
+        vidTillstand({ typ: 'fel', meddelande })
+    }
 }
