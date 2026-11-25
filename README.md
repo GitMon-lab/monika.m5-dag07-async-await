@@ -65,8 +65,6 @@ poäng: vem ska hantera felet?
 Skriv `hamtaTvaRatterEfterVarandra` med två `await` i rad, och `hamtaTvaRatterParallellt` med `Promise.all`.
 Två tester mäter tiden. Skriv i `docs/async-anteckningar.md` (eller i en kommentar) varför den parallella är snabbare.
 
-**\*** Här är jag nu
-
 ---
 
 ### Steg 5. Försök igen och tidsgräns
