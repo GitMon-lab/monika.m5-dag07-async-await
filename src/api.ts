@@ -98,6 +98,13 @@ export async function hamtaMedForsok<T>(
 //    new Error("Tidsgränsen överskreds"). Tips: Promise.race med en promise som avvisas efter ms.
 export function medTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
     // TODO
+    const timeoutPromise = new Promise<T>((_, reject) => {
+        setTimeout(() => {
+            reject(new Error('Tidsgränsen överskreds'))
+        }, ms)
+    })
+
+    return Promise.race([promise, timeoutPromise])
 }
 
 // 8. Tillståndsmaskinen för att ladda något: laddar -> klar / tomt / fel.
