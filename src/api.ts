@@ -48,6 +48,14 @@ export async function hamtaTvaRatterEfterVarandra(
     ms: number = 100
 ): Promise<Ratt[]> {
     // TODO
+
+    try {
+        const a = await hamtaRattFranServer(id1, ms)
+        const b = await hamtaRattFranServer(id2, ms)
+        return [a, b]
+    } catch {
+        return []
+    }
 }
 
 // 5. Samma sak, men båda ANROPEN startas samtidigt (Promise.all). Ska gå dubbelt så snabbt.
@@ -57,6 +65,12 @@ export async function hamtaTvaRatterParallellt(
     ms: number = 100
 ): Promise<Ratt[]> {
     // TODO
+    return await Promise.all([
+        hamtaRattFranServer(id1, ms),
+        hamtaRattFranServer(id2, ms)
+    ])
+
+    // ingen await i arrayen utan en gemensam await går dubbelt så snabbt
 }
 
 // 6. Försök upp till maxForsok gånger. anropFn är en funktion som returnerar en promise.
@@ -67,6 +81,17 @@ export async function hamtaMedForsok<T>(
     maxForsok: number
 ): Promise<T> {
     // TODO
+    let senasteFel: unknown
+
+    for (let i = 0; i < maxForsok; i++) {
+        try {
+            return await anropFn()
+        } catch (fel) {
+            senasteFel = fel
+        }
+    }
+
+    throw senasteFel
 }
 
 // 7. Ge en promise en tidsgräns. Är den inte klar inom ms millisekunder: avvisa med

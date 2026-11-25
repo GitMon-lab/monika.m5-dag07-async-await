@@ -51,15 +51,23 @@ Forka repot, kör `git clone`, öppna mappen i VS Code och starta Vite-servern p
 
 ### Steg 2. Del 1: skriv om kedjorna i kedjor.js
 
-Fyra funktioner använder `.then()`. Skriv om var och en till en `async function` med `await`. Beteendet ska vara exakt detsamma. Gör en funktion i taget och kör testerna efter varje. Commit när alla fyra är gröna.
+Fyra funktioner använder `.then()`. Skriv om var och en till en `async function` med `await`.
+Beteendet ska vara exakt detsamma. Gör en funktion i taget och kör testerna efter varje. Commit när alla fyra är gröna.
 
 ### Steg 3. Del 2: hamtaMeny, hamtaRattNamn och hamtaRattEllerNull
 
-Öppna `src/api.ts`. Skriv de tre första funktionerna. Den första väntar på menyn. Den andra låter felet följa med. Den tredje fångar felet med `try/catch` och returnerar `null`. Skillnaden mellan två och tre är dagens viktigaste poäng: vem ska hantera felet?
+Öppna `src/api.ts`. Skriv de tre första funktionerna. Den första väntar på menyn. Den andra låter felet följa med.'
+Den tredje fångar felet med `try/catch` och returnerar `null`. Skillnaden mellan två och tre är dagens viktigaste
+poäng: vem ska hantera felet?
 
 ### Steg 4. Efter varandra eller samtidigt
 
-Skriv `hamtaTvaRatterEfterVarandra` med två `await` i rad, och `hamtaTvaRatterParallellt` med `Promise.all`. Två tester mäter tiden. Skriv i `docs/async-anteckningar.md` (eller i en kommentar) varför den parallella är snabbare.
+Skriv `hamtaTvaRatterEfterVarandra` med två `await` i rad, och `hamtaTvaRatterParallellt` med `Promise.all`.
+Två tester mäter tiden. Skriv i `docs/async-anteckningar.md` (eller i en kommentar) varför den parallella är snabbare.
+
+**\*** Här är jag nu
+
+---
 
 ### Steg 5. Försök igen och tidsgräns
 
